@@ -1,9 +1,10 @@
-FROM docker.io/library/rockylinux:9.3
+FROM registry.access.redhat.com/ubi9/ubi-init:9.3
+#FROM docker.io/library/rockylinux:9.3
 
 RUN rm -f /etc/yum.repos.d/*.repo \
     && dnf clean all
 
-COPY yum.repos.d-9.3/*.repo /etc/yum.repos.d
+#COPY yum.repos.d-9.3/*.repo /etc/yum.repos.d
 
 RUN dnf update -y \
     && dnf install -y --allowerasing \
@@ -37,7 +38,7 @@ RUN dnf update -y \
       rdma-core \
     && dnf clean all
 
-RUN touch /etc/sysconfig/disable-deprecation-warnings
+#RUN touch /etc/sysconfig/disable-deprecation-warnings
 
 # For SELinux enabled nodes:
 #   The wwclient service fails to start on boot if appropriate SELinux file
